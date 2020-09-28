@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+
+
     diff-lcs (1.4.4)
     pg (1.2.3)
     rspec (3.9.0)
@@ -17,12 +19,16 @@ GEM
       rspec-support (~> 3.9.0)
     rspec-support (3.9.3)
 
+
 PLATFORMS
   ruby
 
 DEPENDENCIES
   pg
+
+
   rspec
+
 
 BUNDLED WITH
    2.1.4
