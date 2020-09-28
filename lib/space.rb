@@ -12,4 +12,10 @@ class Space
     Space.new(username, description, price)
   end
 
+  def self.all
+    
+
+
+
+
 end
