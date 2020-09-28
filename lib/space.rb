@@ -1,5 +1,6 @@
 class Space
 
+
   attr_reader :username, :description, :price, :id
 
   def initialize(id, username, description, price)
@@ -18,8 +19,5 @@ class Space
 
   def self.all
   end
-
-
-
 
 end
