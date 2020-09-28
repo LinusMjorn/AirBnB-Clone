@@ -23,14 +23,28 @@ describe User do
 
     end
   end
+  # describe "#list" do
+  # it "Create listing" do
+  #   truncates
+  #   user = User.store("otterpassword", "HappyOtters","happyotter@gmail.com")
+  #   space = double("space", :id=> 1, :description => "Hi", :price => 20)
 
+  # end
+  # end
+
+
+  describe "#find" do
+    it "Find user by username and return all values" do
+      truncates
+      user = User.store("otterpassword", "HappyOtters","happyotter@gmail.com")
+      expect(User.find("HappyOtters").username).to eq(user.username)
+      expect(User.find("HappyOtters").email).to eq(user.email)
+      expect(User.find("HappyOtters").id).to eq(user.id)
+    end
+  end
 end
 =begin
-  describe "#store" do
-  it "" do
-  end
-  end
-
+  
   describe "#list" do
   it "" do
   end

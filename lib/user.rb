@@ -13,4 +13,10 @@ class User
   end
 
 
+  def self.find(username)
+    connection = PG.connect(dbname: 'airbnb_test')
+    result = connection.exec("SELECT username, id, email FROM users WHERE username = '#{username}'")
+    User.new(result[0]['id'], result[0]['email'], result[0]['username'])
+  end
+
 end
