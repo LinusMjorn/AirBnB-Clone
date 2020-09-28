@@ -1,0 +1,12 @@
+<h1>Your listings below</h1>
+<h1>Logged in as username</h1>
+<ul>
+  <% @spaces.each do |space| %>
+  <li>
+    <%= space.userid %> has posted a space with description: <%= space.description %> for £<%= space.price %> per night.
+  </li>
+  <% end %>
+</ul>
+<form action="/spaces/new" method="get">
+  <input type="submit" value="Add Listing">
+</form>
