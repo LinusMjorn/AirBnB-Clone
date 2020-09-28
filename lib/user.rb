@@ -19,4 +19,21 @@ class User
     User.new(result[0]['id'], result[0]['email'], result[0]['username'])
   end
 
+  def self.authenticate?(username, password)
+    connection = PG.connect(dbname: 'airbnb_test')
+    result = connection.exec("SELECT password FROM users WHERE username = '#{username}' AND password = crypt('#{password}', password)")
+    if result.num_tuples.zero?
+      false
+    else
+      !(result[0]['password'] == password)
+    end
+  end
+
+  def self.duplicated_username?(username)
+    connection = PG.connect(dbname: 'airbnb_test')
+    result = connection.exec("SELECT username FROM users WHERE username = '#{username}'")
+    !(result.num_tuples.zero?)
+  end
+
+
 end
