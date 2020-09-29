@@ -34,3 +34,10 @@ def login_happyotter
   click_button 'Login'
 end
 
+def add_new_listing
+  visit '/spaces/new'
+  fill_in :description, with: 'Trump Tower'
+  fill_in :price, with: '2500'
+  click_button 'Post Space'
+end
+
