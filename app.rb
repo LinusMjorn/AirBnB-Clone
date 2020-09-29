@@ -4,6 +4,7 @@ require './lib/database_connection.rb'
 require './lib/user'
 require 'sinatra/flash'
 require './database_connection_setup'
+require './lib/dashboard'
 
 
 class Airbnb < Sinatra::Base
@@ -17,7 +18,7 @@ class Airbnb < Sinatra::Base
 
   get '/spaces' do
     @current_user = session[:current_user]
-    @spaces = Space.all
+    @spaces = Dashboard.all
     erb :spaces
   end
 

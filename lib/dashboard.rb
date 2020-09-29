@@ -1,10 +1,16 @@
 require './database_connection_setup'
 require_relative 'database_connection'
 
+
 class Dashboard 
 
-    def initialize()
+    attr_reader :spaceid, :username, :description, :price
 
+    def initialize(spaceid, username, description, price)
+        @spaceid = spaceid
+        @username = username
+        @description = description
+        @price = price
 
     end
 
