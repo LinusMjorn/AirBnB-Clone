@@ -1,6 +1,6 @@
 require 'sinatra/base'
 require './lib/space.rb'
-require './lib/database_connection.rb'
+# require './lib/database_connection.rb'
 require './database_connection_setup'
 
 class Airbnb < Sinatra::Base
