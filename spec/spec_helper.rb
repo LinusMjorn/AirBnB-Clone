@@ -1,6 +1,7 @@
 require 'setup_test_database'
 require "capybara"
 require "capybara/rspec"
+require 'web_helper'
 
 require File.join(File.dirname(__FILE__), "..", "app.rb")
 

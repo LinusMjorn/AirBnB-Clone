@@ -37,5 +37,11 @@ class User
     !(result.num_tuples.zero?)
   end
 
+def self.unique_email?(email)
+  connection = PG.connect(dbname: 'airbnb_test')
+  result = connection.exec("SELECT email FROM users WHERE email = '#{email}'")
+  result.num_tuples.zero?
+end
+
 
 end
