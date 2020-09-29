@@ -3,6 +3,8 @@ require './lib/space.rb'
 require './lib/database_connection.rb'
 require './lib/user'
 require 'sinatra/flash'
+require './database_connection_setup'
+
 
 class Airbnb < Sinatra::Base
 
@@ -20,8 +22,13 @@ class Airbnb < Sinatra::Base
   end
 
   get '/spaces/new' do
-    @spaces = Space.all
-    erb :spaces
+    erb :new_space
+  end
+
+  post '/spaces/new' do
+    @userid = 75
+    Space.create(@userid, params[:description], params[:price])
+    redirect '/spaces'
   end
 
   post '/signup' do

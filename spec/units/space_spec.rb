@@ -16,8 +16,8 @@ describe Space do
     it 'shows all spaces' do
       Space.create(15, 'seafront room', 400)
       Space.create(666, 'bachelor pad', 50)
-      expect(Space.all[0].description).to eq 'seafront room'
-      expect(Space.all[1].description).to eq 'bachelor pad'
+      expect(Space.all[0].description).to eq 'bachelor pad'
+      expect(Space.all[1].description).to eq 'seafront room'
     end
   end
 end
