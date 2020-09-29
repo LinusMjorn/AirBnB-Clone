@@ -1,6 +1,11 @@
 require 'setup_test_database'
 require "capybara"
 require "capybara/rspec"
+require "pg"
+ENV['ENVIRONMENT'] = 'test' 
+ENV['RACK_TEST'] = 'test'
+
+
 
 require File.join(File.dirname(__FILE__), "..", "app.rb")
 
