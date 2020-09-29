@@ -1,6 +1,12 @@
+
 require './lib/user.rb'
 require 'pg'
 require 'data_helper.rb'
+
+require_relative '../lib/user.rb'
+require 'pg'
+require_relative './data_helper.rb'
+
 describe User do
   let(:email) {double "test_email" }
   let(:username) { double "test_username" }

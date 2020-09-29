@@ -1,4 +1,4 @@
-require 'database_connection'
+require_relative 'database_connection'
 
 class Space
 
@@ -19,6 +19,8 @@ class Space
   end
 
   def self.all
+    DatabaseConnection.setup('airbnb_test')
+
     result = DatabaseConnection.query("SELECT * FROM spaces;") #join onto users table from username JOIN ON userid = users.id
     result.map { |space|
     Space.new(space['id'], space['userid'], space['description'], space['price']) }

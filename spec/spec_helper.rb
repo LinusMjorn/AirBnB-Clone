@@ -1,4 +1,10 @@
 require 'setup_test_database'
+require "capybara"
+require "capybara/rspec"
+
+require File.join(File.dirname(__FILE__), "..", "app.rb")
+
+Capybara.app = Airbnb
 
 RSpec.configure do |config|
   config.before(:each) do
