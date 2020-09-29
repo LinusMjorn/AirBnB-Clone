@@ -18,10 +18,14 @@ end
 
 feature 'Go to login page' do
     scenario 'Login successfully' do
-    
+        signup_bear1
+        login_bear1
+        expect(page).to have_content "Logged in as Bear"
     end
 
     scenario 'Login unsuccessfully' do
-    
+        signup_bear1
+        login_happyotter
+        expect(page).to have_content "Login details incorrect"
     end
 end

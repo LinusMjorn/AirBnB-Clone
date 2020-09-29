@@ -5,6 +5,8 @@ require './lib/user'
 require 'sinatra/flash'
 
 class Airbnb < Sinatra::Base
+
+  enable :sessions, :method_override
   register Sinatra::Flash
 
   get '/' do
@@ -12,6 +14,7 @@ class Airbnb < Sinatra::Base
   end
 
   get '/spaces' do
+    @current_user = session[:current_user]
     @spaces = Space.all
     erb :spaces
   end
@@ -32,7 +35,8 @@ class Airbnb < Sinatra::Base
   end
 
   post '/login' do
-    if User.authenticate?(params[:username], params[:password])
+    if User.authenticate?(params[:login_username], params[:login_password])
+      session[:current_user] = params[:login_username]
       redirect '/spaces'
     else 
       flash[:incorrect_login] = "Login details incorrect"
