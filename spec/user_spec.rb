@@ -55,6 +55,18 @@ describe User do
     end
   end
 
+  describe "#unique email" do
+    it "it returns false if you try to create a user with the same email" do
+      User.store("otterpassword", "HappyOtters","happyotter@gmail.com")
+      expect(User.unique_email?("happyotter@gmail.com")).to eq false
+    end
+
+    it "it returns true if you try to create a user with a unique email" do
+      User.store("otterpassword", "HappyOtters","happyotter@gmail.com")
+      expect(User.unique_email?("happyotter2@gmail.com")).to eq true
+    end
+  end
+
 
 
 

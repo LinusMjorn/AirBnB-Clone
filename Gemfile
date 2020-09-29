@@ -8,5 +8,6 @@ gem 'sinatra'
 gem 'capybara'
 # gem "rails"
 gem 'pg'
+gem 'sinatra-flash'
 
 gem 'rspec'
