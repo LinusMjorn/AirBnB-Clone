@@ -1,4 +1,5 @@
 require_relative 'database_connection'
+require './database_connection_setup'
 
 class Space
 
@@ -12,15 +13,11 @@ class Space
   end
 
   def self.create(userid, description, price)
-    DatabaseConnection.setup('airbnb_test')
-
     result = DatabaseConnection.query("INSERT INTO spaces (userid, description, price) VALUES ('#{userid}', '#{description}', '#{price}') RETURNING id;")
     Space.new(result[0]['id'], userid, description, price)
   end
 
   def self.all
-    DatabaseConnection.setup('airbnb_test')
-
     result = DatabaseConnection.query("SELECT * FROM spaces ORDER BY id DESC;") #join onto users table from username JOIN ON userid = users.id
     result.map { |space|
     Space.new(space['id'], space['userid'], space['description'], space['price']) }
