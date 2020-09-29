@@ -50,4 +50,10 @@ class Airbnb < Sinatra::Base
       redirect '/'
     end
   end
+
+  post '/sessions/logout' do
+    session.clear
+    flash[:logout]= "You have logged out"
+    redirect '/'
+  end
 end
