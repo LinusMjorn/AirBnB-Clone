@@ -34,7 +34,7 @@ class Airbnb < Sinatra::Base
   post '/signup' do
     if (!User.duplicated_username?(params[:username]) && User.unique_email?(params[:email]))
       User.store(params[:password], params[:username], params[:username])
-      redirect '/'
+      redirect '/dashboard'
     else
       flash[:already_signed_up] = "Username or email is taken"
       redirect '/'
@@ -56,4 +56,9 @@ class Airbnb < Sinatra::Base
     flash[:logout]= "You have logged out"
     redirect '/'
   end
+
+  get '/dashboard' do
+    erb :dashboard
+  end
+
 end

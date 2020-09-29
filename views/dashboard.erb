@@ -1,0 +1,14 @@
+<head>
+  <link rel='stylesheet' href='mystyle.css' >
+</head>
+
+<body>
+  <h1>Your bookings below</h1>
+  <% if !@current_user %>
+    <%= "You are not logged in" %>
+  <% else %>
+    <%= "#{@current_user} %>'s dashboard" %>
+
+  <% end %>
+
+</body>
