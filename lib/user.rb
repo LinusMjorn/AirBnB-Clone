@@ -1,4 +1,5 @@
-
+require './database_connection_setup'
+require_relative 'database_connection'
 
 class User
   attr_reader :email, :username, :id
@@ -9,21 +10,18 @@ class User
   end
 
   def self.store(password, username, email)
-    connection = PG.connect(dbname: 'airbnb_test')
-    result =  connection.exec("INSERT INTO users (username, password, email) VALUES ('#{username}', crypt('#{password}', gen_salt('bf')), '#{email}') RETURNING id, username, email; ")
+    result =  DatabaseConnection.query("INSERT INTO users (username, password, email) VALUES ('#{username}', crypt('#{password}', gen_salt('bf')), '#{email}') RETURNING id, username, email; ")
     User.new(result[0]['id'], result[0]['email'], result[0]['username'])
   end
 
 
   def self.find(username)
-    connection = PG.connect(dbname: 'airbnb_test')
-    result = connection.exec("SELECT username, id, email FROM users WHERE username = '#{username}'")
+    result = DatabaseConnection.query("SELECT username, id, email FROM users WHERE username = '#{username}'")
     User.new(result[0]['id'], result[0]['email'], result[0]['username'])
   end
 
   def self.authenticate?(username, password)
-    connection = PG.connect(dbname: 'airbnb_test')
-    result = connection.exec("SELECT password FROM users WHERE username = '#{username}' AND password = crypt('#{password}', password)")
+    result = DatabaseConnection.query("SELECT password FROM users WHERE username = '#{username}' AND password = crypt('#{password}', password)")
       if (result.num_tuples.zero?) 
         false
       else
@@ -33,14 +31,12 @@ class User
   end
 
   def self.duplicated_username?(username)
-    connection = PG.connect(dbname: 'airbnb_test')
-    result = connection.exec("SELECT username FROM users WHERE username = '#{username}'")
+    result = DatabaseConnection.query("SELECT username FROM users WHERE username = '#{username}'")
     !(result.num_tuples.zero?)
   end
 
 def self.unique_email?(email)
-  connection = PG.connect(dbname: 'airbnb_test')
-  result = connection.exec("SELECT email FROM users WHERE email = '#{email}'")
+  result = DatabaseConnection.query("SELECT email FROM users WHERE email = '#{email}'")
   result.num_tuples.zero?
 end
 

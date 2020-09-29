@@ -28,4 +28,13 @@ feature 'Go to login page' do
         login_happyotter
         expect(page).to have_content "Login details incorrect"
     end
+
+    feature 'Log out' do
+        scenario ' User can logout succesfully' do
+            signup_bear1
+            login_bear1
+            click_button 'Log out'
+            expect(page).to have_content "You have logged out"
+        end
+    end
 end
