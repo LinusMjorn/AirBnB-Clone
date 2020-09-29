@@ -1,6 +1,12 @@
+
+require './lib/user.rb'
+require 'pg'
+require 'data_helper.rb'
+
 require_relative '../lib/user.rb'
 require 'pg'
 require_relative './data_helper.rb'
+
 describe User do
   let(:email) {double "test_email" }
   let(:username) { double "test_username" }
@@ -24,13 +30,46 @@ describe User do
     end
   end
 
-end
-=begin
-  describe "#store" do
-  it "" do
-  end
+  describe "#authenticate" do
+    it "returns true with correct password" do
+      user = User.store("otterpassword", "HappyOtters","happyotter@gmail.com")
+      expect(User.authenticate?("HappyOtters", "otterpassword")).to eq true 
+
+
+    end 
+    it "returns false with incorrect password" do
+      expect(User.authenticate?("HappyOtters", "nototterpassword")).to eq false 
+    end
+
   end
 
+  describe "#valid username" do
+    it "it returns true if you try to create two people with the same usernme" do
+      User.store("otterpassword", "HappyOtters","happyotter@gmail.com")
+      expect(User.duplicated_username?("HappyOtters")).to eq true
+    end
+
+    it "returns false when you create a new unique username" do
+      User.store("otterpassword", "HappyOtters","happyotter@gmail.com")
+      expect(User.duplicated_username?("HappierOtters")).to eq false
+    end
+  end
+
+
+
+
+  describe "#find" do
+    it "Find user by username and return all values" do
+      truncates
+      user = User.store("otterpassword", "HappyOtters","happyotter@gmail.com")
+      expect(User.find("HappyOtters").username).to eq(user.username)
+      expect(User.find("HappyOtters").email).to eq(user.email)
+      expect(User.find("HappyOtters").id).to eq(user.id)
+    end
+  end
+end
+=begin
+  
   describe "#list" do
   it "" do
   end
@@ -57,3 +96,12 @@ end
   end
 end
 =end
+
+  # describe "#list" do
+  # it "Create listing" do
+  #   truncates
+  #   user = User.store("otterpassword", "HappyOtters","happyotter@gmail.com")
+  #   space = double("space", :id=> 1, :description => "Hi", :price => 20)
+
+  # end
+  # end
