@@ -2,6 +2,7 @@ require 'sinatra/base'
 require './lib/space.rb'
 require './lib/database_connection.rb'
 require './lib/user'
+require './lib/request'
 require 'sinatra/flash'
 require './database_connection_setup'
 
