@@ -8,13 +8,17 @@ describe Request do
       expect(request.date).to eq '30/09/2020'
       expect(request.guest_id).to eq 75
       expect(request.space_id).to eq 2
-      expect(request.approved).to eq false
+      expect(request.approved).to eq 0
     end
   end
 
-  # describe '.create' do
-  #   it 'adds a row to the bookings table and returns a Request object' do
-      
-  #   end
-  # end
+  describe '.create' do
+    it 'adds a row to the bookings table and returns a Request object' do
+      request = Request.create('2020-09-30', 75, 2)
+      expect(request.date).to eq '2020-09-30'
+      expect(request.guest_id).to eq 75
+      expect(request.space_id).to eq 2
+      expect(request.approved).to eq 0
+    end
+  end
 end
