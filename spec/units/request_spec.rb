@@ -8,7 +8,7 @@ describe Request do
       expect(request.date).to eq '30/09/2020'
       expect(request.guest_id).to eq 75
       expect(request.space_id).to eq 2
-      expect(request.approved).to eq false
+      expect(request.approved).to eq 0
     end
   end
 
