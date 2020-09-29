@@ -3,8 +3,10 @@
 <input type="submit" value="Log out" style="margin-left: 50%; height: 50px; width: 300px;">
 </form>
 
-
 <h1>Logged in as <%=@current_user%></h1>
+<% else %>
+<h1>You are not logged in</h1>
+<% end %>
 <ul>
   <% @spaces.each do |space| %>
   <li>
