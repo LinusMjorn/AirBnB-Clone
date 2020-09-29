@@ -26,7 +26,7 @@ class User
         false
       else
         !(result[0]['password'] == password)
-    end
+      end
 
   end
 
@@ -35,10 +35,17 @@ class User
     !(result.num_tuples.zero?)
   end
 
-def self.unique_email?(email)
-  result = DatabaseConnection.query("SELECT email FROM users WHERE email = '#{email}'")
-  result.num_tuples.zero?
-end
+  def self.unique_email?(email)
+    result = DatabaseConnection.query("SELECT email FROM users WHERE email = '#{email}'")
+    result.num_tuples.zero?
+  end
 
+  def self.create(username)
+    result = DatabaseConnection.query("SELECT id, email FROM users WHERE username = '#{username}'")
+    @current_user = User.new(result[0]['id'], result[0]['email'], username)
+  end
 
+  def self.instance
+    @current_user
+  end
 end
