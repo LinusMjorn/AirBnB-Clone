@@ -8,8 +8,8 @@
 
 <p1> For all your ursidae housing needs</p1>
 
-</body>
-
+</body><br>
+<%=flash[:logout]%>
  <h1> <%=flash[:already_signed_up] %></h1>
 <form action="/signup" method="post">
 <input type="text" name="username" placeholder="username">
