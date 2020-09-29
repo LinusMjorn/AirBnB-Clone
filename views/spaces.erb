@@ -8,10 +8,13 @@
 <h1>You are not logged in</h1>
 <% end %>
 <ul>
-  <% @spaces.each do |space| %>
+  <% @spaces.each do |space| %> 
   <li>
     <%= space.userid %> has posted a space with description: <%= space.description %> for £<%= space.price %> per night.
+
+  
   </li>
+
   <% end %>
 </ul>
 <form action="/spaces/new" method="get">

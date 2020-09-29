@@ -19,9 +19,9 @@ class Request
   end
 
   def self.my_requests(user_id)
-    result = DatabaseConnection.query("SELECT * FROM bookings WHERE guest_id = #{user_id}")
+    result = DatabaseConnection.query("SELECT * FROM bookings WHERE guest_id = '#{user_id}'")
     result.map do |request|
-      Request.new(result['id'], request['date'], request['guest_id'], request['space_id'])
+      Request.new(request['id'], request['date'], request['guest_id'], request['space_id'])
     end
   end
 end
