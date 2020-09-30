@@ -14,6 +14,7 @@ class Airbnb < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
+    @spaces = Dashboard.all
     erb (:view_index)
   end
 
@@ -28,8 +29,8 @@ class Airbnb < Sinatra::Base
   end
 
   post '/spaces/new' do
-    @userid = 1
-    Space.create(@userid, params[:description], params[:price])
+    @current_user = User.instance
+    Space.create(@current_user.id, params[:description], params[:price])
     redirect '/spaces'
   end
 

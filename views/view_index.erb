@@ -28,3 +28,15 @@
 <form action="/spaces" method="get">
   <input type="submit" value="View My Spaces">
 </form> 
+
+<ul>
+<% @spaces.each do |space| %>
+<li class="space" id="space-<%=space.spaceid%>">
+<%= space.username %> has posted the property <%= space.description %> for £<%= space.price %> per night.
+<form action="/request/<%=space.spaceid%>/new" method="get">
+<input type="submit" value="Request Space">
+</form> 
+</li>
+<%end%>
+
+</ul>
