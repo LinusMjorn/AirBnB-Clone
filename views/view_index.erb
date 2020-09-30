@@ -36,7 +36,7 @@
 <ul>
   <% @spaces.each do |space| %>
   <li>
-    <form action="/request" method='get'>
+    <form action="/request/<%= space.id %>" method='get'>
       <%= space.username %> has posted a space with description: <%= space.description %> for £<%= space.price %> per night.
       <input type='text' name='name'>
       <input type='submit' value='request'>
