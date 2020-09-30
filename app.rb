@@ -14,6 +14,7 @@ class Airbnb < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
+    @spaces = Dashboard.all
     erb (:view_index)
     #call spaces.all
   end
@@ -28,10 +29,12 @@ class Airbnb < Sinatra::Base
     erb :new_space
   end
 
+
   post '/dashboard/new' do
     @current_user = User.instance
     Space.create(@current_user.id, params[:description], params[:price])
     redirect '/dashboard'
+
   end
 
   post '/signup' do
@@ -56,7 +59,7 @@ class Airbnb < Sinatra::Base
   end
 
   post '/sessions/logout' do
-    session.clear
+    User.log_out
     flash[:logout]= "You have logged out"
     redirect '/'
   end
@@ -68,5 +71,9 @@ class Airbnb < Sinatra::Base
   end
 
 
+
+  get '/request/:id/new' do
+    erb :new_request
+  end
 
 end

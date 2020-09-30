@@ -48,4 +48,8 @@ class User
   def self.instance
     @current_user
   end
+
+  def self.log_out
+    @current_user = nil
+  end
 end
