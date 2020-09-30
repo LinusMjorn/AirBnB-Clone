@@ -1,6 +1,6 @@
 require 'pg'
 require 'dashboard'
-
+=begin
 describe Dashboard do
 describe '.all' do
     it "shows current user's spaces" do
@@ -14,3 +14,4 @@ describe '.all' do
     end
   end
 end
+=end
