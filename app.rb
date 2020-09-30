@@ -16,7 +16,6 @@ class Airbnb < Sinatra::Base
   get '/' do
     @spaces = Space.all
     erb (:view_index)
-    #call spaces.all
   end
 
   get '/dashboard' do
@@ -72,7 +71,8 @@ class Airbnb < Sinatra::Base
 
 
 
-  get '/request/:id/new' do
+  get '/request/:id' do
+    @id = params[:id]
     erb :new_request
   end
 
