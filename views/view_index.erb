@@ -29,9 +29,19 @@
   <input type="submit" value="View My Spaces">
 </form> 
 
-
-
 <form action="/dashboard" method="get">
   <input type="submit" value="View Dashboard">
 </form> 
+
+<ul>
+  <% @spaces.each do |space| %>
+  <li>
+    <form action="/request" method='get'>
+      <%= space.username %> has posted a space with description: <%= space.description %> for £<%= space.price %> per night.
+      <input type='text' name='name'>
+      <input type='submit' value='request'>
+    </form>
+  </li>
+  <% end %>
+</ul>
 
