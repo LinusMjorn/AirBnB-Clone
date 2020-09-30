@@ -2,6 +2,7 @@ require 'sinatra/base'
 require './lib/space.rb'
 require './lib/database_connection.rb'
 require './lib/user'
+require './lib/request'
 require 'sinatra/flash'
 require './database_connection_setup'
 
@@ -16,7 +17,7 @@ class Airbnb < Sinatra::Base
   end
 
   get '/spaces' do
-    @current_user = session[:current_user]
+    @current_user = User.instance
     @spaces = Space.all
     erb :spaces
   end
@@ -43,7 +44,8 @@ class Airbnb < Sinatra::Base
 
   post '/login' do
     if User.authenticate?(params[:login_username], params[:login_password])
-      session[:current_user] = params[:login_username]
+      @current_user = User.create(params[:login_username])
+      @current_user = User.instance
       redirect '/spaces'
     else 
       flash[:incorrect_login] = "Login details incorrect"
@@ -55,6 +57,12 @@ class Airbnb < Sinatra::Base
     session.clear
     flash[:logout]= "You have logged out"
     redirect '/'
+  end
+
+  get '/requests' do
+    @current_user = User.instance
+    @requests = Request.my_requests(@current_user.id)
+    erb :requests
   end
 
   get '/dashboard' do
