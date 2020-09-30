@@ -8,7 +8,8 @@ feature 'see list of requests relevant to the user' do
     visit '/sessions/logout'
     signup_happyotter
     login_happyotter
-    first('.space').click_button 'Request Stay'
+    first(:button, 'Request Space', minimum: 1).click
+    #first('.space').click_button 'Request Space'
     click_button 'View My Spaces'
     click_button 'Manage My Requests'
     expect(page).to have content 'You have requested to stay at Trump Tower on 2021-01-01'

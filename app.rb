@@ -71,4 +71,8 @@ class Airbnb < Sinatra::Base
     erb :dashboard
   end
 
+  get '/request/:id/new' do
+    erb :new_request
+  end
+
 end
