@@ -4,7 +4,7 @@ require 'pg'
 feature 'Go to signup page' do
     scenario 'Signup successfully' do
         signup_bear1
-        expect(page).to have_current_path('/dashboard')
+        expect(page).to have_current_path('/')
         expect(page).not_to have_content('Username or email is taken')
     end
 

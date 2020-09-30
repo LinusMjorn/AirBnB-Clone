@@ -11,7 +11,7 @@ class User
 
   def self.store(password, username, email)
     result =  DatabaseConnection.query("INSERT INTO users (username, password, email) VALUES ('#{username}', crypt('#{password}', gen_salt('bf')), '#{email}') RETURNING id, username, email; ")
-    User.new(result[0]['id'], result[0]['email'], result[0]['username'])
+    @current_user = User.new(result[0]['id'], result[0]['email'], result[0]['username'])
   end
 
 
