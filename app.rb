@@ -14,7 +14,7 @@ class Airbnb < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
-    @spaces = Dashboard.all
+    @spaces = Space.all
     erb (:view_index)
     #call spaces.all
   end
