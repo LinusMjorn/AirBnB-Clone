@@ -15,11 +15,12 @@ class Airbnb < Sinatra::Base
 
   get '/' do
     erb (:view_index)
+    #call spaces.all
   end
 
   get '/dashboard' do
     @current_user = User.instance
-    @spaces = Dashboard.all
+    @spaces = Dashboard.all(@current_user.id)
     erb :dashboard
   end
 
@@ -34,8 +35,9 @@ class Airbnb < Sinatra::Base
   end
 
   post '/signup' do
+
     if (!User.duplicated_username?(params[:username]) && User.unique_email?(params[:email]))
-      User.store(params[:password], params[:username], params[:username])
+      @current_user = User.store(params[:password], params[:username], params[:username])
       redirect '/'
     else
       flash[:already_signed_up] = "Username or email is taken"
@@ -46,7 +48,6 @@ class Airbnb < Sinatra::Base
   post '/login' do
     if User.authenticate?(params[:login_username], params[:login_password])
       @current_user = User.create(params[:login_username])
-      @current_user = User.instance
       redirect '/dashboard'
     else 
       flash[:incorrect_login] = "Login details incorrect"
