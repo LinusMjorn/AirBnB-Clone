@@ -10,7 +10,7 @@ feature 'see list of requests relevant to the user' do
     login_happyotter
     first(:button, 'Request Space', minimum: 1).click
     #first('.space').click_button 'Request Space'
-    click_button 'View My Spaces'
+    click_button 'View Dashboard'
     click_button 'Manage My Requests'
     expect(page).to have content 'You have requested to stay at Trump Tower on 2021-01-01'
   end

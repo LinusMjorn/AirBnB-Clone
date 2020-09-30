@@ -14,7 +14,7 @@ class Airbnb < Sinatra::Base
   register Sinatra::Flash
 
   get '/' do
-    @spaces = Dashboard.all
+    @spaces = Space.all
     erb (:view_index)
     #call spaces.all
   end
@@ -51,7 +51,7 @@ class Airbnb < Sinatra::Base
   post '/login' do
     if User.authenticate?(params[:login_username], params[:login_password])
       @current_user = User.create(params[:login_username])
-      redirect '/dashboard'
+      redirect '/'
     else 
       flash[:incorrect_login] = "Login details incorrect"
       redirect '/'

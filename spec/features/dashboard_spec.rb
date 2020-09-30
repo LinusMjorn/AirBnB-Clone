@@ -3,7 +3,9 @@ feature Dashboard do
     feature '.all' do
         scenario "shows current user's spaces" do
           signup_bear1
+          click_button "View Dashboard"
           add_new_listing
+          
           click_button 'Log out'
           signup_happyotter
           add_new_listing
