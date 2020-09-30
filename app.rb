@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sinatra/base'
 require './lib/space.rb'
 require './lib/database_connection.rb'
@@ -7,14 +9,12 @@ require 'sinatra/flash'
 require './database_connection_setup'
 require './lib/dashboard'
 
-
 class Airbnb < Sinatra::Base
-
   enable :sessions, :method_override
   register Sinatra::Flash
 
   get '/' do
-    erb (:view_index)
+    erb(:view_index)
   end
 
   get '/spaces' do
@@ -34,11 +34,11 @@ class Airbnb < Sinatra::Base
   end
 
   post '/signup' do
-    if (!User.duplicated_username?(params[:username]) && User.unique_email?(params[:email]))
+    if !User.duplicated_username?(params[:username]) && User.unique_email?(params[:email])
       User.store(params[:password], params[:username], params[:username])
       redirect '/dashboard'
     else
-      flash[:already_signed_up] = "Username or email is taken"
+      flash[:already_signed_up] = 'Username or email is taken'
       redirect '/'
     end
   end
@@ -48,15 +48,15 @@ class Airbnb < Sinatra::Base
       @current_user = User.create(params[:login_username])
       @current_user = User.instance
       redirect '/spaces'
-    else 
-      flash[:incorrect_login] = "Login details incorrect"
+    else
+      flash[:incorrect_login] = 'Login details incorrect'
       redirect '/'
     end
   end
 
   post '/sessions/logout' do
     session.clear
-    flash[:logout]= "You have logged out"
+    flash[:logout] = 'You have logged out'
     redirect '/'
   end
 
@@ -69,5 +69,4 @@ class Airbnb < Sinatra::Base
   get '/dashboard' do
     erb :dashboard
   end
-
 end

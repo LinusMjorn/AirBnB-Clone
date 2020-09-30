@@ -1,9 +1,9 @@
+# frozen_string_literal: true
+
 require './database_connection_setup'
 require_relative 'database_connection'
 
-
 class Space
-
   attr_reader :userid, :description, :price, :id
 
   def initialize(id, userid, description, price)
@@ -19,9 +19,9 @@ class Space
   end
 
   def self.all
-    result = DatabaseConnection.query("SELECT * FROM spaces ORDER BY id DESC;") #join onto users table from username JOIN ON userid = users.id
-    result.map { |space|
-    Space.new(space['id'], space['userid'], space['description'], space['price']) }
+    result = DatabaseConnection.query('SELECT * FROM spaces ORDER BY id DESC;') # join onto users table from username JOIN ON userid = users.id
+    result.map do |space|
+      Space.new(space['id'], space['userid'], space['description'], space['price'])
+    end
   end
-
 end

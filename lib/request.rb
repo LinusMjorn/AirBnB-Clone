@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require './database_connection_setup'
 require_relative 'database_connection'
 
 class Request
-
   attr_reader :id, :date, :guest_id, :space_id, :approved
 
   def initialize(id, date, guest_id, space_id)
@@ -14,7 +15,7 @@ class Request
   end
 
   def self.create(date, guest_id, space_id)
-    result = DatabaseConnection.query("INSERT INTO bookings (date, guest_id, space_id, approved) VALUES ('#{date}', '#{guest_id}', '#{space_id}', '0') RETURNING id;") #the BIT data type allows us to use 1 for true and 0 for false.
+    result = DatabaseConnection.query("INSERT INTO bookings (date, guest_id, space_id, approved) VALUES ('#{date}', '#{guest_id}', '#{space_id}', '0') RETURNING id;") # the BIT data type allows us to use 1 for true and 0 for false.
     Request.new(result[0]['id'], date, guest_id, space_id)
   end
 

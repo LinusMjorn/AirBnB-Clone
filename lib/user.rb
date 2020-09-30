@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './database_connection_setup'
 require_relative 'database_connection'
 
@@ -14,7 +16,6 @@ class User
     User.new(result[0]['id'], result[0]['email'], result[0]['username'])
   end
 
-
   def self.find(username)
     result = DatabaseConnection.query("SELECT username, id, email FROM users WHERE username = '#{username}'")
     User.new(result[0]['id'], result[0]['email'], result[0]['username'])
@@ -22,17 +23,16 @@ class User
 
   def self.authenticate?(username, password)
     result = DatabaseConnection.query("SELECT password FROM users WHERE username = '#{username}' AND password = crypt('#{password}', password)")
-      if (result.num_tuples.zero?) 
-        false
-      else
-        !(result[0]['password'] == password)
-      end
-
+    if result.num_tuples.zero?
+      false
+    else
+      result[0]['password'] != password
+    end
   end
 
   def self.duplicated_username?(username)
     result = DatabaseConnection.query("SELECT username FROM users WHERE username = '#{username}'")
-    !(result.num_tuples.zero?)
+    !result.num_tuples.zero?
   end
 
   def self.unique_email?(email)

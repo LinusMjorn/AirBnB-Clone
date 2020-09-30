@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'request'
 
 describe Request do
-
-  let(:john) { double( 'User', ) }
+  let(:john) { double('User') }
 
   describe '#new' do
     it 'a new request has id, proposed date, guest-id and space-id' do
@@ -25,7 +26,6 @@ describe Request do
     end
   end
 
-
   describe '.my_requests' do
     it 'pulls requests from the database into an array of request objects' do
       Request.create('2020-09-30', 75, 2)
@@ -34,5 +34,4 @@ describe Request do
       expect(Request.my_requests(76).last.date).to eq '2020-01-01'
     end
   end
-
 end

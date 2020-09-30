@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'setup_test_database.rb'
 
 feature 'see list of spaces' do
