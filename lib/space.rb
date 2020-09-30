@@ -21,7 +21,7 @@ class Space
   def self.all
     result = DatabaseConnection.query("SELECT * FROM spaces JOIN users ON userid = users.id ORDER BY spaces.id DESC;") 
     result.map { |space|
-    Space.new(space['spaces.id'], space['username'], space['description'], space['price']) }
+    Space.new(space['id'], space['username'], space['description'], space['price']) }
   end
 
 end
