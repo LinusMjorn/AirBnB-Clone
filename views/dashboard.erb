@@ -4,11 +4,9 @@
 
 <body>
   <h1>Your bookings below</h1>
-  <% if !@current_user %>
-    <%= "You are not logged in" %>
+  <% if @current_user %>
+  <%= @current_user.username  %> dashboard
   <% else %>
-    <%= "#{@current_user} %>'s dashboard" %>
-
+  <%= "You are not logged in" %>
   <% end %>
-
 </body>
