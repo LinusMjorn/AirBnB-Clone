@@ -1,4 +1,4 @@
-=begin
+
 feature Dashboard do
     feature '.all' do
         scenario "shows current user's spaces" do
@@ -12,4 +12,4 @@ feature Dashboard do
         end
       end
     end
-=end    
+   
