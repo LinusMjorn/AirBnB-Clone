@@ -1,5 +1,6 @@
-require_relative 'database_connection'
 require './database_connection_setup'
+require_relative 'database_connection'
+
 
 class Space
 

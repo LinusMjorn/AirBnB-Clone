@@ -5,6 +5,7 @@ require './lib/user'
 require './lib/request'
 require 'sinatra/flash'
 require './database_connection_setup'
+require './lib/dashboard'
 
 
 class Airbnb < Sinatra::Base
@@ -18,7 +19,7 @@ class Airbnb < Sinatra::Base
 
   get '/spaces' do
     @current_user = User.instance
-    @spaces = Space.all
+    @spaces = Dashboard.all
     erb :spaces
   end
 
@@ -27,7 +28,7 @@ class Airbnb < Sinatra::Base
   end
 
   post '/spaces/new' do
-    @userid = 75
+    @userid = 1
     Space.create(@userid, params[:description], params[:price])
     redirect '/spaces'
   end

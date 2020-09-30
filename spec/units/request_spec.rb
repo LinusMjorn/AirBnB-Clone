@@ -30,7 +30,7 @@ describe Request do
     it 'pulls requests from the database into an array of request objects' do
       Request.create('2020-09-30', 75, 2)
       Request.create('2020-01-01', 76, 3)
-      expect(Request.my_requests(75)[0].date).to eq '2020-09-30'
+      expect(Request.my_requests(75).first.date).to eq '2020-09-30'
       expect(Request.my_requests(76).last.date).to eq '2020-01-01'
     end
   end
