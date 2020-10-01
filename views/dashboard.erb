@@ -1,31 +1,50 @@
-<h1>Your listings below</h1>
+<head>
+  <link rel='stylesheet' href='mystyle.css' >
+</head>
 
+<header>
+
+  <form method='get' action='/' id='home'>
+    <input type='submit' value='Home'>
+  </form>
+  <% if @current_user %>
+    <form method='get' action='/requests' id='requests'>
+      <input type='submit' value='Manage Requests'>
+    </form>
+  
+    <form method='post' action='/sessions/logout' id='logout'>
+      <input type='submit' value='Log Out'>
+    </form>
+  <% end %>
+
+</header>
+
+<body>
 
 <% if @current_user %>
-<h1>Logged in as <%=@current_user.username%></h1>
-  <form action="/dashboard/new" method="get">
-    <input type="submit" value="Add Space">
-  </form>
+
+  <h1>Logged in as <%=@current_user.username%></h1>
+  <h1>Your listings below</h1>
+
+    <form action="/dashboard/new" method="get">
+      <input type="submit" value="Add Space">
+    </form>
+
+    <ul>
+      <% @spaces.each do |space| %> 
+      <li>
+        <%= space.username %> has posted a space with description: <%= space.description %> for £<%= space.price %> per night.
+      </li>
+      <% end %>
+    </ul>
+
 <% else %>
-<h1>You are not logged in</h1>
+
+  <%= flash[:not_logged_in] %>
+
 <% end %>
-<ul>
-  <% @spaces.each do |space| %> 
-  <li>
-    <%= space.username %> has posted a space with description: <%= space.description %> for £<%= space.price %> per night.
-  </li>
 
-  <% end %>
-</ul>
-
-<form action="/requests" method="get">
-  <input type="submit" value="Manage My Requests">
-</form>
-
-
-<form action="/sessions/logout" method="post">
-  <input type="submit" value="Log out" >
-</form>
+</body>
 
 <form action="/" method="get">
   <input type="submit" value="Home" >

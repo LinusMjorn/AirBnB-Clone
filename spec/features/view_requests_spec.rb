@@ -16,6 +16,15 @@ feature 'see list of requests relevant to the user' do
   end
 end
 
+feature 'it has navigation buttons' do
+  scenario 'the page displays navigation buttons' do
+    signup_bear1
+    visit '/requests'
+    expect(page).to have_button "Home"
+    expect(page).to have_button "Dashboard"
+    expect(page).to have_button "Log Out"
+  end
+end
 # feature 'see list of requests relevant to the user' do
 #   scenario 'User goes to request list page and sees a list of the requests theyve made and a list of requests made for their spaces' do
     
