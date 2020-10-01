@@ -1,6 +1,3 @@
-require 'pg'
-
-
 feature 'Go to signup page' do
     scenario 'Signup successfully' do
         signup_bear1
@@ -9,10 +6,10 @@ feature 'Go to signup page' do
     end
 
     scenario 'Signup unsuccessfully' do
-            signup_bear1
-            signup_bear1
-            expect(page).to have_current_path('/')
-            expect(page).to have_content('Username or email is taken')
+        signup_bear1
+        signup_bear1
+        expect(page).to have_current_path('/')
+        expect(page).to have_content('Username or email is taken')
     end
 end
 

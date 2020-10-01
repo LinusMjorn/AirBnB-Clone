@@ -4,7 +4,7 @@ feature Dashboard do
         scenario "shows current user's spaces" do
           signup_bear1
           add_new_listing
-          click_button 'Log out'
+          click_button 'Log Out'
           signup_happyotter
           add_new_listing
           expect(page).to have_content "HappyOtter has posted a space with description"

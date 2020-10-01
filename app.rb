@@ -13,14 +13,21 @@ class Airbnb < Sinatra::Base
   enable :sessions, :method_override
   register Sinatra::Flash
 
+  before do
+    @current_user = User.instance
+  end
+
   get '/' do
     @spaces = Space.all
     erb (:view_index)
   end
 
   get '/dashboard' do
-    @current_user = User.instance
-    @spaces = Dashboard.all(@current_user.id)
+    if @current_user
+      @spaces = Dashboard.all(@current_user.id)
+    else
+      flash[:not_logged_in]= "You are not logged in"
+    end
     erb :dashboard
   end
 
@@ -30,7 +37,7 @@ class Airbnb < Sinatra::Base
 
 
   post '/dashboard/new' do
-    @current_user = User.instance
+    # @current_user = User.instance
     Space.create(@current_user.id, params[:description], params[:price])
     redirect '/dashboard'
 
@@ -50,7 +57,7 @@ class Airbnb < Sinatra::Base
   post '/login' do
     if User.authenticate?(params[:login_username], params[:login_password])
       @current_user = User.create(params[:login_username])
-      redirect '/dashboard'
+      redirect '/'
     else 
       flash[:incorrect_login] = "Login details incorrect"
       redirect '/'
@@ -64,12 +71,10 @@ class Airbnb < Sinatra::Base
   end
 
   get '/requests' do
-    @current_user = User.instance
+    # @current_user = User.instance
     @requests = Request.my_requests(@current_user.id)
     erb :requests
   end
-
-
 
   get '/request/:id' do
     @id = params[:id]
