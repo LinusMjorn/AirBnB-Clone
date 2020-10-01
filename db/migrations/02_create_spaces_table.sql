@@ -1,1 +1,1 @@
-CREATE TABLE spaces (id SERIAL PRIMARY KEY, userid INT, description VARCHAR(335), price INT); 
+CREATE TABLE spaces (id SERIAL PRIMARY KEY, userid INT, description VARCHAR(335), price INT, available_dates TEXT[]); 
