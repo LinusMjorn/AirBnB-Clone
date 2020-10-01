@@ -36,4 +36,12 @@ class Space
     @available_dates << date
   end
 
+  def middle_dates(min_date, max_date)
+    dates = []
+    until Date.parse(min_date) = Date.parse(max_date)
+    dates << Date.parse(min_date) 
+    min_date += 1
+  end
+
+
 end
