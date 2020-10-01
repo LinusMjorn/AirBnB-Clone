@@ -44,7 +44,7 @@ describe Space do
 
   describe '#middle_dates' do
   it 'returns the dates in between the min and max dates' do
-    expect(middle_dates('2020-10-10', '2020-10-15')).to eq ['2020-10-10','2020-10-11', '2020-10-12', '2020-10-13', '2020-10-14', '2020-10-15']
+    expect(Space.middle_dates('2020-10-10', '2020-10-15')).to eq ['2020-10-10','2020-10-11', '2020-10-12', '2020-10-13', '2020-10-14', '2020-10-15']
   end
 end
 

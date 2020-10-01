@@ -1,5 +1,6 @@
 require './database_connection_setup'
 require_relative 'database_connection'
+require 'date'
 
 
 class Space
@@ -36,11 +37,14 @@ class Space
     @available_dates << date
   end
 
-  def middle_dates(min_date, max_date)
+  def self.middle_dates(min_date, max_date)
     dates = []
-    until Date.parse(min_date) = Date.parse(max_date)
-    dates << Date.parse(min_date) 
-    min_date += 1
+    date = Date.parse(min_date)
+    until date.strftime > Date.parse(max_date).strftime
+      dates << date.strftime
+      date += 1
+    end
+    dates
   end
 
 
