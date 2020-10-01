@@ -38,14 +38,8 @@ class Space
   end
 
   def self.middle_dates(min_date, max_date)
-    dates = []
-    date = Date.parse(min_date)
-    until date.strftime > Date.parse(max_date).strftime
-      dates << date.strftime
-      date += 1
-    end
-    dates
+    (Date.parse(min_date)..Date.parse(max_date)).map{ |date| 
+    date.strftime}
   end
-
 
 end
