@@ -76,7 +76,8 @@ class Airbnb < Sinatra::Base
   end
 
   get '/request/:id' do
-    @id = params[:id]
+    @space = Space.find(params[:id])
+    p params
     erb :new_request
   end
 
