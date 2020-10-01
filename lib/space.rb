@@ -4,17 +4,19 @@ require_relative 'database_connection'
 
 class Space
 
-  attr_reader :username, :description, :price, :id
+  attr_reader :username, :description, :price, :id, :available_dates
 
-  def initialize(id, username, description, price)
+  def initialize(id, username, description, price, available_dates)
     @id = id
     @username = username
     @description = description
     @price = price
+    @available_dates = available_dates
   end
 
-  def self.create(userid, description, price)
-    result = DatabaseConnection.query("INSERT INTO spaces (userid, description, price) VALUES ('#{userid}', '#{description}', '#{price}') RETURNING id;")
+
+  def self.create(userid, description, price, available_dates)
+    result = DatabaseConnection.query("INSERT INTO spaces (userid, description, price, available_dates) VALUES ('#{userid}', '#{description}', '#{price}', '#{available_dates}') RETURNING id;")
     # Space.new(result[0]['spaces.id'], userid, description, price)
   end
 
