@@ -32,6 +32,8 @@ describe Space do
       entry = Space.create(user.id, 'seafront room', 400, ['2021-01-30', '2021-02-20', '2021-02-22'])
       space = Space.new(entry.id,user.id, 'seafront room', 400, ['2021-01-30', '2021-02-20', '2021-02-22'])
       expect(Space.find(space.id).id).to eq space.id
+      expect(Space.find(space.id).description).to eq space.description
+      expect(Space.find(space.id).price).to eq space.price
    end
  end
 

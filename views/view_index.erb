@@ -43,7 +43,7 @@
   <li>
     <form action="/request/<%= space.id %>" method='get'>
       <%= space.username %> has posted a space with description: <%= space.description %> for £<%= space.price %> per night.
-      <input type='text' name='name'>
+      <input type='hidden' name=<%space.userid%>>
       <input type='submit' value='request'>
     </form>
   </li>

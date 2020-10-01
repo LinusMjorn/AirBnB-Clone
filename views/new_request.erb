@@ -1,1 +1,6 @@
 <h1>New request</h1>
+
+<form action="/request/:id" method="post">
+<input type="date" name="booking_date" min="<%=@space.available_dates.first%>" max="<%=@space.available_dates.last%>"
+<input type="submit" value="book now">
+</form>
