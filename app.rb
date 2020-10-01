@@ -37,7 +37,7 @@ class Airbnb < Sinatra::Base
 
 
   post '/dashboard/new' do
-    Space.create(@current_user.id, params[:description], params[:price], params[:available_dates])
+    Space.create(@current_user.id, params[:description], params[:price])
     redirect '/dashboard'
 
   end
@@ -45,7 +45,7 @@ class Airbnb < Sinatra::Base
   post '/signup' do
 
     if (!User.duplicated_username?(params[:username]) && User.unique_email?(params[:email]))
-      @current_user = User.store(params[:password], params[:username], params[:username])
+      @current_user = User.store(params[:password], params[:username], params[:email])
       redirect '/'
     else
       flash[:already_signed_up] = "Username or email is taken"
