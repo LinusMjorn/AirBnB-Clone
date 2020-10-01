@@ -26,4 +26,10 @@ class Space
     Space.new(space['id'], space['userid'], space['description'], space['price'], space['available_dates']) } #use gsub to remove {} and then turn back into array with split(","). Write a unit test for .all and get that to work
   end
 
+  def self.find(space_id)
+    result = DatabaseConnection.query("SELECT userid, description, price FROM spaces JOIN users ON userid = users.id WHERE spaces.id = #{space_id}")
+    Space.new(space_id, result.first['userid'], result.first['description'], result.first['price'])
+  end
+
+
 end
