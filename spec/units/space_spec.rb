@@ -1,4 +1,5 @@
 require 'space'
+require 'user'
 
 
 describe Space do
@@ -20,4 +21,14 @@ describe Space do
       expect(Space.all[1].description).to eq 'seafront room'
     end
   end
+
+  describe '.find' do
+    it 'finds a space with using the space id' do
+      user = User.store("password","linus","linus@linus.com")
+      entry = Space.create(user.id, 'seafront room', 400)
+      space = Space.new(entry[0]['id'],user.id, 'seafront room', 400)
+      expect(Space.find(space.id).id).to eq space.id
+   end
+ end
+
 end

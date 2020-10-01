@@ -24,4 +24,10 @@ class Space
     Space.new(space['spaces.id'], space['username'], space['description'], space['price']) }
   end
 
+  def self.find(space_id)
+    result = DatabaseConnection.query("SELECT userid, description, price FROM spaces JOIN users ON userid = users.id WHERE spaces.id = #{space_id}")
+    Space.new(space_id, result.first['userid'], result.first['description'], result.first['price'])
+  end
+
+
 end
