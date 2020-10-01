@@ -1,23 +1,25 @@
 <head>
   <link rel='stylesheet' href='mystyle.css' >
+  <link rel='icon' type=image/png' href='bear.png'>
+  <title>Requests</title>
 </head>
 
-<header>
+<body>
+<nav>
   <form method='get' action='/' id='home'>
-    <input type='submit' value='Home'>
+    <input class='navbar' type='submit' value='Home'>
   </form>
   <% if @current_user %>
     <form method='get' action='/dashboard' id='dashboard'>
-      <input type='submit' value='Dashboard'>
+      <input class='navbar' type='submit' value='Dashboard'>
     </form>
     <form method='post' action='/sessions/logout' id='logout'>
-      <input type='submit' value='Log Out'>
+      <input class='navbar' type='submit' value='Log Out'>
     </form>
   <% end %>
-</header>
+</nav>
 
-<body>
-<h1><%= @current_user.username %>: Your requests are listed below</h1>
+<h3><%= @current_user.username %>: Your requests are listed below</h3>
 
 
 

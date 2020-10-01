@@ -2,7 +2,7 @@ feature 'Go to signup page' do
   scenario 'Signup successfully' do
     visit('/')
     signup_bear1
-    click_button 'View Dashboard'
+    click_button 'Dashboard'
     expect(page).to have_content 'Logged in as Bear'
     click_button 'Log Out'
   end
