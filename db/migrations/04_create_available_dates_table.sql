@@ -1,0 +1,1 @@
+CREATE TABLE available_dates (id SERIAL PRIMARY KEY, space_id INTEGER, available_date DATE);

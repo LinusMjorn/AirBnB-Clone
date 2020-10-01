@@ -37,8 +37,7 @@ class Airbnb < Sinatra::Base
 
 
   post '/dashboard/new' do
-    # @current_user = User.instance
-    Space.create(@current_user.id, params[:description], params[:price])
+    Space.create(@current_user.id, params[:description], params[:price], params[:available_dates])
     redirect '/dashboard'
 
   end
