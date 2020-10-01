@@ -81,4 +81,18 @@ class Airbnb < Sinatra::Base
     erb :new_request
   end
 
+  post '/request/:id' do
+    p params
+    @space = Space.find(params[:id])
+    if Space.space_available?(@space.id, params[:booking_date] )
+      DatabaseConnection.query("DELETE FROM available_dates WHERE available_date = '#{params[:booking_date]}' AND space_id = '#{@space.id}';")
+      Request.create(params[:booking_date], @current_user.id, @space.id)
+      redirect"/"
+    else 
+      flash[:shits_been_booked] = "Date already booked please select one of these: #{@space.available_dates}"
+      redirect '/request/:id'
+
+    end
+  end
+
 end

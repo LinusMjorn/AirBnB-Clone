@@ -4,7 +4,8 @@ require_relative 'database_connection'
 
 class Space
 
-  attr_reader :username, :userid, :description, :price, :id, :available_dates
+  attr_reader :username, :userid, :description, :price, :id
+  attr_accessor :available_dates
 
   def initialize(id, userid, description, price, available_dates)
     @id = id
@@ -20,6 +21,21 @@ class Space
     #Space.new(result[0]['id'], userid, description, price, available_dates)
   end
 
+  def min_date
+    @available_dates.min
+  end
+
+  def max_date
+    @available_dates.max
+  end
+=begin  
+  def self.space_available?(space_id, date)
+   dates = DatabaseConnection.query("SELECT available_date FROM available_dates WHERE space_id= #{space_id}")
+   date_array = dates.map { |date| date['available_date'] }
+   p date_array
+   p !date_array.include?(date )
+  end
+=end
   def self.all
     result = DatabaseConnection.query("SELECT * FROM spaces;") # JOIN users ON spaces.userid = users.id ORDER BY spaces.id DESC;") 
     result.map { |space|
@@ -30,7 +46,7 @@ class Space
     result = DatabaseConnection.query("SELECT userid, description, price FROM spaces JOIN users ON userid = users.id WHERE spaces.id = #{space_id}")
     dates = DatabaseConnection.query("SELECT available_date FROM available_dates WHERE space_id =#{space_id}")
     date_array = dates.map do |date|
-      p date['available_date']
+       date['available_date']
     end
 
     Space.new(space_id, result[0]['userid'], result[0]['description'], result[0]['price'].to_i, date_array)

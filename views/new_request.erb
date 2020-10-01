@@ -1,2 +1,10 @@
 <h1>New request</h1>
-<%=@space.available_dates%>
+<%=@space.available_dates.min%>
+<%=@space.available_dates.max%>
+
+
+<form action="/request/<%= @space.id %> " method="post">
+<input type="date" name="booking_date" min=<%=@space.available_dates.min%> max=<%=@space.available_dates.max%> >
+<input type="submit" value="book now">
+</form>
+<%= flash[:shits_been_booked] %> 
