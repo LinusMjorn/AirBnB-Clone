@@ -4,6 +4,7 @@ require "capybara/rspec"
 require 'web_helper'
 require "pg"
 require './database_connection_setup'
+require 'date'
 
 ENV['ENVIRONMENT'] = 'test' 
 ENV['RACK_TEST'] = 'test'
@@ -14,6 +15,7 @@ require File.join(File.dirname(__FILE__), "..", "app.rb")
 Capybara.app = Airbnb
 
 RSpec.configure do |config|
+
   config.before(:each) do
     setup_test_database
   end

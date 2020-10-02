@@ -1,33 +1,31 @@
 <head>
   <link rel='stylesheet' href='mystyle.css' >
+  <link rel='icon' type=image/png' href='bear.png'>
+  <link rel="shortcut icon" type="image/x-icon" href="bear.png" />
+  <title>Bear Cave</title>
 </head>
 
-<header>
-
+<body>
+<nav>
   <form method='get' action='/' id='home'>
-    <input type='submit' value='Home'>
+    <input class='navbar' type='submit' value='Home'>
   </form>
   <% if @current_user %>
     <form method='get' action='/requests' id='requests'>
-      <input type='submit' value='Manage Requests'>
+      <input class='navbar' type='submit' value='Manage Requests'>
     </form>
-  
     <form method='post' action='/sessions/logout' id='logout'>
-      <input type='submit' value='Log Out'>
+      <input class='navbar' type='submit' value='Log Out'>
     </form>
   <% end %>
-
-</header>
-
-<body>
+</nav>
 
 <% if @current_user %>
 
-  <h1>Logged in as <%=@current_user.username%></h1>
-  <h1>Your listings below</h1>
+  <h3>Logged in as <%=@current_user.username%></h3>
 
     <form action="/dashboard/new" method="get">
-      <input type="submit" value="Add Space">
+      <input class='new_space' type="submit" value="Add New Space">
     </form>
 
     <ul>

@@ -1,6 +1,5 @@
 require 'sinatra/base'
-require './lib/space.rb'
-require './lib/database_connection.rb'
+require './lib/space'
 require './lib/user'
 require './lib/request'
 require 'sinatra/flash'
@@ -37,16 +36,16 @@ class Airbnb < Sinatra::Base
 
 
   post '/dashboard/new' do
-    # @current_user = User.instance
-    Space.create(@current_user.id, params[:description], params[:price])
-    redirect '/dashboard'
 
+    Space.create(@current_user.id, params[:description], params[:price])
+
+    redirect '/dashboard'
   end
 
   post '/signup' do
 
     if (!User.duplicated_username?(params[:username]) && User.unique_email?(params[:email]))
-      @current_user = User.store(params[:password], params[:username], params[:username])
+      @current_user = User.store(params[:password], params[:username], params[:email])
       redirect '/'
     else
       flash[:already_signed_up] = "Username or email is taken"
@@ -71,14 +70,30 @@ class Airbnb < Sinatra::Base
   end
 
   get '/requests' do
-    # @current_user = User.instance
     @requests = Request.my_requests(@current_user.id)
     erb :requests
   end
 
   get '/request/:id' do
-    @id = params[:id]
+    @space = Space.find(params[:id])
+    p params
     erb :new_request
+  end
+
+  post '/sent/request/:id' do
+    p params
+    @space = Space.find(params[:id])
+    if Space.space_available?(@space.id, params[:booking_date])
+      #DatabaseConnection.query("DELETE FROM available_dates WHERE available_date = #{params[:booking_date]} AND space_id = '#{@space.id}';") not needed till aproval 
+      Request.create(params[:booking_date], @current_user.id, @space.id)
+      redirect"/"
+    else 
+      flash[:shits_been_booked] = "Date already booked please select one of these: #{@space.available_dates}"
+      p flash[:shits_been_booked]
+      redirect '/'
+      
+
+    end
   end
 
 end

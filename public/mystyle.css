@@ -1,24 +1,74 @@
-@font-face {
-  font-family: bones;
-  src: url("Black Bones.ttf"); 
-
-}
-
-header {
-  display: inline-block
-}
 
 body {
-  background-image: url('bear.png');
+  background-image: url('empty_room.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
+  color: white
+}
 
+nav {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 }
 
 h1 {
-  text-align: center;
-  font-size: 400%;
-  font-family: bones;
+  font-size: 200%;
+  font-family: Zapfino;
+  color: white
+}
 
+h3 {
+  font-family: Zapfino;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.navbar {
+  margin: 20px;
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.navbar:hover {
+  cursor:pointer
+}
+
+.request {
+  float: right;
+  margin-right: 25%;
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.request:hover {
+  cursor:pointer
+}
+
+.new_space {
+  background-color: transparent;
+  color: white;
+  border: none;
+}
+
+.new_space:hover {
+  cursor:pointer
+}
+
+.login:hover {
+  cursor:pointer
+}
+
+#logo {
+  display: inline-block;
+  float: center;
+  height: 60px;
+  width: auto; 
 }
