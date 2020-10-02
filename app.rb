@@ -70,6 +70,7 @@ class Airbnb < Sinatra::Base
 
   get '/requests' do
     @requests = Request.my_requests(@current_user.id)
+    
     erb :requests
   end
 
@@ -96,5 +97,6 @@ class Airbnb < Sinatra::Base
 
     end
   end
+
 
 end
