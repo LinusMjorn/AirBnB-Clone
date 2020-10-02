@@ -23,7 +23,7 @@
 
 <p> For all your ursidae housing needs</p>
 
-</body><br>
+
 <% if !@current_user%>
 <%=flash[:logout]%>
  <h1> <%=flash[:already_signed_up] %></h1>
@@ -48,9 +48,11 @@
   <li>
     <form action="/request/<%= space.id %>" method='get'>
       <%= space.description %> for £<%= space.price %> per night.
+      <% if @current_user%>
       <input class='request' type='submit' value='Request'>
+      <% end %>
     </form>
   </li>
   <% end %>
 </ul>
-
+</body><br>
