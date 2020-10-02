@@ -11,6 +11,7 @@ class Request
     @guest_id = guest_id
     @space_id = space_id
     @approved = 0
+    
   end
 
   def self.create(date, guest_id, space_id)
@@ -46,6 +47,11 @@ class Request
   def self.find(id)
     result = DatabaseConnection.query("SELECT * FROM bookings WHERE id = #{id}")
     Request.new(id, result[0]['date'], result[0]['guest_id'], result[0]['space_id'])
+  end
+
+  def confirmed?
+    result = DatabaseConnection.query("SELECT approved FROM bookings WHERE id = #{@id}")
+    result[0]['approved'].to_i.zero?
   end
 
 

@@ -1,4 +1,29 @@
+<head>
+  <link rel='stylesheet' href='/mystyle.css' >
+  <link rel='icon' type='image/png' href='/bear.png'>
+  <title>Index</title>
+</head>
 
+<body>
+<nav>
+  <% if @current_user %>
+  <form method='get' action='/' id='home'>
+    <input class='navbar' type='submit' value='Home'>
+  </form>
+    <form method='get' action='/dashboard' id='dashboard'>
+      <input class='navbar' type='submit' value='Dashboard'>
+    </form>  
+    <form method='get' action='/requests' id='requests'>
+      <input class='navbar' type='submit' value='Manage Requests'>
+    </form>
+    <form method='post' action='/sessions/logout' id='logout'>
+      <input class='navbar' type='submit' value='Log Out'>
+    </form>
+  <% end %>
+</nav>
+<a href='/'>
+<img id="logo" src="/bear.png" href='/'>
+</a>
 <form action="/request/<%=@booking.id%>/accept" method="get">
 <input type="submit" value="accept booking" >
 </form>
