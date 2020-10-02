@@ -1,6 +1,6 @@
 <head>
-  <link rel='stylesheet' href='mystyle.css'>
-  <link rel='icon' type=image/png' href='bear.png'>
+  <link rel='stylesheet' href='/mystyle.css'>
+  <link rel='icon' type='image/png' href='/bear.png'>
   <title>Add listing</title>
 </head>
 
@@ -12,7 +12,7 @@
   <% if @current_user %>
     <form method='get' action='/dashboard' id='dashboard'>
       <input class='navbar' type='submit' value='Dashboard'>
-    </form>
+    </form>  
     <form method='get' action='/requests' id='requests'>
       <input class='navbar' type='submit' value='Manage Requests'>
     </form>
@@ -21,13 +21,16 @@
     </form>
   <% end %>
 </nav>
-
+<a href='/'>
+<img id="logo" src="/bear.png" href='/'>
+</a>
  <h3> Add your space </h3>
 
   <form action='/dashboard/new' method='post'>
     <input type='text' name='description' placeholder='describe the space'>
     <input type='text' name='price' placeholder='price'>
-    <input type='date' name='available_dates' placeholder="['2020-05-05', '2021-09-09']">
+    <input type='date' name='start_date' >
+    <input type='date' name='end_date' >
     <input type='submit' value='Post Space'>
   </form>
 

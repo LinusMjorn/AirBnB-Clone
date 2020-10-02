@@ -4,7 +4,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-  color: white
+  color: white;
+  opacity: 0.6
 }
 
 nav {
@@ -27,6 +28,9 @@ h3 {
 
 ul {
   list-style-type: none;
+  font-family: Papyrus;
+  margin-top: 50px
+
 }
 
 .navbar {
@@ -34,10 +38,12 @@ ul {
   background-color: transparent;
   color: white;
   border: none;
+  font-family: Papyrus
 }
 
 .navbar:hover {
-  cursor:pointer
+  cursor:pointer;
+  text-decoration: underline;
 }
 
 .request {
@@ -49,17 +55,21 @@ ul {
 }
 
 .request:hover {
-  cursor:pointer
+  cursor:pointer;
+  text-decoration: underline;
 }
 
 .new_space {
   background-color: transparent;
   color: white;
   border: none;
+  font-size: 150%;
+  font-family: Papyrus
 }
 
 .new_space:hover {
-  cursor:pointer
+  cursor:pointer;
+  text-decoration: underline;
 }
 
 .login:hover {

@@ -32,7 +32,7 @@ describe Space do
       expect(Space.find(space.id).id).to eq space.id
     end
   end
-
+=begin
   describe '#add_date' do
     it 'adds an available date to a space' do
       linus = User.store("password2","linus","linus@linus.com")
@@ -41,7 +41,7 @@ describe Space do
       expect(space.available_dates).to eq ['2020-05-05']
     end
   end
-
+=end
   describe '#middle_dates' do
   it 'returns the dates in between the min and max dates' do
     expect(Space.middle_dates('2020-10-10', '2020-10-15')).to eq ['2020-10-10','2020-10-11', '2020-10-12', '2020-10-13', '2020-10-14', '2020-10-15']

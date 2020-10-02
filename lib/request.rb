@@ -24,4 +24,23 @@ class Request
       Request.new(request['id'], request['date'], request['guest_id'], request['space_id'])
     end
   end
+
+  def self.my_requests_for(user_id)
+    result = DatabaseConnection.query("SELECT * FROM bookings JOIN spaces ON space_id = spaces.id WHERE spaces.userid = '#{user_id}'")
+    result.map do |request|
+      Request.new(request['id'], request['date'], request['guest_id'], request['space_id'])
+    end
+  end
+
+  def self.get_space(space_id)
+    result = DatabaseConnection.query("SELECT userid, description, price FROM spaces WHERE id = '#{space_id}'")
+    Space.new(space_id, result[0]['userid'], result[0]['description'], result[0]['price'].to_i)
+  end
+
+  def self.get_username(user_id)
+    result = DatabaseConnection.query("SELECT username FROM users WHERE id = '#{user_id}'")
+    result[0]['username']
+  end
+
+
 end

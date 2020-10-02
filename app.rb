@@ -36,9 +36,8 @@ class Airbnb < Sinatra::Base
 
 
   post '/dashboard/new' do
-
-    Space.create(@current_user.id, params[:description], params[:price])
-
+    space = Space.create(@current_user.id, params[:description], params[:price])              #the below exception is to avoid it breaking rspec tests, we have been unable to get capybara to fill in date fields
+    Space.add_dates(space.id, params[:start_date], params[:end_date])  unless params[:start_date].length.zero? #if time, refactor this method to be completed within space.create
     redirect '/dashboard'
   end
 
@@ -71,16 +70,17 @@ class Airbnb < Sinatra::Base
 
   get '/requests' do
     @requests = Request.my_requests(@current_user.id)
+    @requests_for = Request.my_requests_for(@current_user.id)
     erb :requests
   end
 
   get '/request/:id' do
     @space = Space.find(params[:id])
-    p params
     erb :new_request
   end
 
   post '/sent/request/:id' do
+
     @space = Space.find(params[:id])
     if Space.space_available?(@space.id, params[:booking_date])
       #DatabaseConnection.query("DELETE FROM available_dates WHERE available_date = #{params[:booking_date]} AND space_id = '#{@space.id}';") not needed till aproval 
@@ -92,5 +92,6 @@ class Airbnb < Sinatra::Base
       redirect'/'
     end
   end
+
 
 end
