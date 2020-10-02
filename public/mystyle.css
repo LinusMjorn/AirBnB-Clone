@@ -29,7 +29,10 @@ h3 {
 ul {
   list-style-type: none;
   font-family: Papyrus;
-  margin-top: 50px
+  margin-top: 50px;
+  /* margin-left: 300px;
+  margin-right: 300px;
+  background-color: rgb(122, 161, 199) */
 
 }
 

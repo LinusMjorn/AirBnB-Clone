@@ -5,7 +5,7 @@ require 'date'
 
 class Space
 
-  attr_reader :username, :userid, :description, :price, :id
+  attr_reader :username, :userid, :description, :price, :id, :name
   attr_accessor :available_dates
 
   def initialize(id, userid, name, description, price)
@@ -16,9 +16,6 @@ class Space
     @price = price
     @available_dates = get_available_dates(@id)
   end
-
- 
-
 
   def self.create(userid, name, description, price)
     result = DatabaseConnection.query("INSERT INTO spaces (userid, description, price, name) VALUES ('#{userid}', '#{description}', '#{price}', '#{name}') RETURNING id")

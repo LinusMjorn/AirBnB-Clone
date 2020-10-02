@@ -55,6 +55,7 @@
   <% @spaces.each do |space| %>
   <li>
     <form action="/request/<%= space.id %>" method='get'>
+      <%= space.name %><br>
       <%= space.description %> for £<%= space.price %> per night.
       <% if @current_user%>
       <input class='request' type='submit' value='Request'>

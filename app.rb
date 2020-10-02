@@ -14,6 +14,7 @@ class Airbnb < Sinatra::Base
 
   before do
     @current_user = User.instance
+
   end
 
   get '/' do
