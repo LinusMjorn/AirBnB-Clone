@@ -2,6 +2,8 @@
 
 Welcome to BearBnB. A webapp that allows users to request from available spaces, upload your available personal spaces together and manage bookings.
 
+A team project web app created in Week 5 of Makers Academy.
+
 ![homepage](public/home.png)
 
 
@@ -11,15 +13,30 @@ Welcome to BearBnB. A webapp that allows users to request from available spaces,
 * PostgresQL
 * Bcrypt
 
-## Getting started
+## Testing
+* Rspec
+* Capybara
+
+## Getting started 
+Run in terminal  
 
     fork this repo  
     git clone path-to-your-repo  
     bundle install
 
+
+
 ## Local Database Setup
+Create database
 
+    psql BearBnB
 
+Set up Database Tables  
+
+    sqlcmd -S db/migrations/01_create_users_table.sql  
+    sqlcmd -S db/migrations/02_ccreate_spaces_table.sql
+    sqlcmd -S db/migrations/03_create_bookings_table.sql
+    sqlcmd -S db/migrations/04_create_available_spaces_tabe.sql
 
 ## Users Stories Implemented
 
