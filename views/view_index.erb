@@ -28,6 +28,10 @@
 <h3>For all your ursidae housing needs</h3>
 
 
+<%= flash[:date_requested] %>
+<%= flash[:date_unavailable] %>
+</body><br>
+
 <% if !@current_user%>
 <%=flash[:logout]%>
  <h1> <%=flash[:already_signed_up] %></h1>
