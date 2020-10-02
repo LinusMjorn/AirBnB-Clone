@@ -1,7 +1,7 @@
 <head>
   <link rel='stylesheet' href='/mystyle.css' >
   <link rel='icon' type='image/png' href='bear.png'>
-  <title>Requests</title>
+  <title>"Requests"</title>
 </head>
 
 <body>
@@ -38,10 +38,15 @@
 
 <ul>
   <% @requests_for.each do |request| %>
-  <li> Somebody requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night.
+  <li> <%=Request.get_username(request.guest_id)%> requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night.
   </li>
+  <form action="/request/<%=request.id%>/respond" method="get">
+  <input type="submit" value="respond">
+  </form>
+  
   <%end%>
 </ul>
+
 
 
 </body>

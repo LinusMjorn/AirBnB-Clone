@@ -25,8 +25,9 @@ class Request
     end
   end
 
-  def self.my_requests_for(user_id)
-    result = DatabaseConnection.query("SELECT * FROM bookings JOIN spaces ON space_id = spaces.id WHERE spaces.userid = '#{user_id}'")
+  def self.my_requests_for(user_id)#SELECT * FROM spaces JOIN bookings ON spaces.id = space_id WHERE userid = 10; SELECT * FROM bookings JOIN spaces ON space_id = spaces.id WHERE spaces.userid =
+    result = DatabaseConnection.query("SELECT * FROM spaces JOIN bookings ON spaces.id = space_id WHERE userid = #{user_id}")
+
     result.map do |request|
       Request.new(request['id'], request['date'], request['guest_id'], request['space_id'])
     end
@@ -40,6 +41,11 @@ class Request
   def self.get_username(user_id)
     result = DatabaseConnection.query("SELECT username FROM users WHERE id = '#{user_id}'")
     result[0]['username']
+  end
+
+  def self.find(id)
+    result = DatabaseConnection.query("SELECT * FROM bookings WHERE id = #{id}")
+    Request.new(id, result[0]['date'], result[0]['guest_id'], result[0]['space_id'])
   end
 
 
