@@ -36,7 +36,13 @@ Set up Database Tables
     sqlcmd -S db/migrations/01_create_users_table.sql  
     sqlcmd -S db/migrations/02_ccreate_spaces_table.sql
     sqlcmd -S db/migrations/03_create_bookings_table.sql
-    sqlcmd -S db/migrations/04_create_available_spaces_tabe.sql
+    sqlcmd -S db/migrations/04_create_available_spaces_table.sql
+
+## How to Run
+    rackup  
+
+visit localhost:9292 on your browser  
+
 
 ## Users Stories Implemented
 
