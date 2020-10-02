@@ -34,7 +34,7 @@ Create database
 Set up Database Tables  
 
     sqlcmd -S db/migrations/01_create_users_table.sql  
-    sqlcmd -S db/migrations/02_ccreate_spaces_table.sql
+    sqlcmd -S db/migrations/02_create_spaces_table.sql
     sqlcmd -S db/migrations/03_create_bookings_table.sql
     sqlcmd -S db/migrations/04_create_available_spaces_table.sql
 
