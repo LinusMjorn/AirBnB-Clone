@@ -72,10 +72,13 @@ class Airbnb < Sinatra::Base
   get '/requests' do
     @requests = Request.my_requests(@current_user.id)
     @requests_for = Request.my_requests_for(@current_user.id)
+    p @requests
+    p @requests_for
     erb :requests
   end
 
   get '/request/:id' do
+    p params
     @space = Space.find(params[:id])
     erb :new_request
   end
@@ -86,7 +89,7 @@ class Airbnb < Sinatra::Base
     if Space.space_available?(@space.id, params[:booking_date])
       #DatabaseConnection.query("DELETE FROM available_dates WHERE available_date = #{params[:booking_date]} AND space_id = '#{@space.id}';") not needed till aproval 
       Request.create(params[:booking_date], @current_user.id, @space.id)
-      flash[:date_requested] = "#{@space.description} has been requested for #{params[:booking_date]}"
+      flash[:date_requested] = "#{@space.name} has been requested for #{params[:booking_date]}"
       redirect"/"
     else 
       flash[:date_unavailable] = "Date already booked please select one of these: #{@space.available_dates}"
@@ -94,5 +97,22 @@ class Airbnb < Sinatra::Base
     end
   end
 
+  get '/request/:id/respond' do
+   p params[:id]
+   @booking = Request.find(params[:id].to_i)
+   p @booking.confirmed?
+    #@request = Request.find(params[:id])
+    #@booking = Request.find
+   erb :respond
+  end
+
+  get '/request/:id/accept' do
+    p params
+    @booking = Request.find(params[:id].to_i)
+    p @booking
+   DatabaseConnection.query("DELETE FROM available_dates WHERE available_date = '#{@booking.date}' AND space_id = #{@booking.space_id};")
+   DatabaseConnection.query("UPDATE bookings SET approved = '1' WHERE id = #{@booking.id};")
+    erb(:confirmation)
+  end
 
 end

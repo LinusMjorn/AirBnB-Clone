@@ -1,7 +1,7 @@
 <head>
   <link rel='stylesheet' href='/mystyle.css' >
   <link rel='icon' type='image/png' href='bear.png'>
-  <title>Requests</title>
+  <title>"Requests"</title>
 </head>
 
 <body>
@@ -30,6 +30,11 @@
 <ul>
     <% @requests.each do |request| %>
     <li> You have requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night.
+     <% if request.confirmed? %>
+     <li> Awaiting Confirmation from landlord </li> 
+    <%else%>
+    <li> Confirmed by the landlord! </li>
+    <%end%>
     </li>
     <%end%>
 </ul>
@@ -38,10 +43,25 @@
 
 <ul>
   <% @requests_for.each do |request| %>
-  <li> Somebody requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night.
-  </li>
+    <div style="border-style: groove; border-color: white; padding: 5px;">
+    <li> <%=Request.get_username(request.guest_id)%> requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night.
+    </li>
+    <% if request.confirmed? %>
+      <li> awaiting confirmation  </li>
+      <form action="/request/<%=request.id%>/respond" method="get">
+      <input type="submit" value="respond">
+      </form>
+    </li> 
+    <% else %>
+      <li> Booking Confirmed </li>
+    <% end %>
+    </div>
+    <br>
   <%end%>
+  
+  
 </ul>
+
 
 
 </body>
