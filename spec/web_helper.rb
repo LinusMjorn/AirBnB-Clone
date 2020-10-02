@@ -30,6 +30,7 @@ end
 
 def add_new_listing
   visit '/dashboard/new'
+  fill_in :name, with: 'Trump Tower'
   fill_in :description, with: 'Trump Tower'
   fill_in :price, with: 2500
   click_button 'Post Space'

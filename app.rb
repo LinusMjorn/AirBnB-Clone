@@ -14,6 +14,7 @@ class Airbnb < Sinatra::Base
 
   before do
     @current_user = User.instance
+
   end
 
   get '/' do
@@ -36,7 +37,7 @@ class Airbnb < Sinatra::Base
 
 
   post '/dashboard/new' do
-    space = Space.create(@current_user.id, params[:description], params[:price])              #the below exception is to avoid it breaking rspec tests, we have been unable to get capybara to fill in date fields
+    space = Space.create(@current_user.id, params[:name], params[:description], params[:price])              #the below exception is to avoid it breaking rspec tests, we have been unable to get capybara to fill in date fields
     Space.add_dates(space.id, params[:start_date], params[:end_date])  unless params[:start_date].length.zero? #if time, refactor this method to be completed within space.create
     redirect '/dashboard'
   end

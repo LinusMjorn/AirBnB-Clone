@@ -33,8 +33,8 @@ class Request
   end
 
   def self.get_space(space_id)
-    result = DatabaseConnection.query("SELECT userid, description, price FROM spaces WHERE id = '#{space_id}'")
-    Space.new(space_id, result[0]['userid'], result[0]['description'], result[0]['price'].to_i)
+    result = DatabaseConnection.query("SELECT userid, name, description, price FROM spaces WHERE id = #{space_id}")
+    Space.new(space_id, result[0]['userid'], result[0]['name'], result[0]['description'], result[0]['price'].to_i)
   end
 
   def self.get_username(user_id)

@@ -5,7 +5,7 @@ require 'user'
 describe Space do
   describe '.create' do
     it 'creates a new listing' do
-      seafront = Space.create(15, 'seafront room', 400)
+      seafront = Space.create(15,'seafront cottages', 'seafront room', 400)
       expect(seafront).to be_a(Space)
       expect(seafront.description).to eq 'seafront room'
       expect(seafront.userid).to eq 15
@@ -17,8 +17,8 @@ describe Space do
     it 'shows all spaces' do
       linus = User.store("password2","linus","linus@linus.com")
       johnny = User.store("password2","johnny","linus@linus.com")
-      Space.create(linus.id, 'seafront room', 400)
-      Space.create(johnny.id, 'bachelor pad', 50)
+      Space.create(linus.id, 'seafront cottages', 'seafront room', 400)
+      Space.create(johnny.id, 'a house', 'bachelor pad', 50)
       expect(Space.all[0].description).to eq 'seafront room'
       expect(Space.all[1].description).to eq 'bachelor pad'
     end
@@ -27,8 +27,8 @@ describe Space do
   describe '.find' do
     it 'finds a space with using the space id' do
       user = User.store("password","linus","linus@linus.com")
-      entry = Space.create(user.id, 'seafront room', 400)
-      space = Space.new(entry.id,user.id, 'seafront room', 400)
+      entry = Space.create(user.id,'seafront cottages', 'seafront room', 400)
+      space = Space.new(entry.id,user.id, 'seafront cottages', 'seafront room', 400)
       expect(Space.find(space.id).id).to eq space.id
     end
   end
