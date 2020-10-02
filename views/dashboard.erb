@@ -1,7 +1,6 @@
 <head>
-  <link rel='stylesheet' href='mystyle.css' >
-  <link rel='icon' type=image/png' href='bear.png'>
-  <link rel="shortcut icon" type="image/x-icon" href="bear.png" />
+  <link rel='stylesheet' href='/mystyle.css' >
+  <link rel='icon' type='image/png' href='bear.png'>
   <title>Bear Cave</title>
 </head>
 
@@ -11,6 +10,9 @@
     <input class='navbar' type='submit' value='Home'>
   </form>
   <% if @current_user %>
+    <form method='get' action='/dashboard' id='dashboard'>
+      <input class='navbar' type='submit' value='Dashboard'>
+    </form>  
     <form method='get' action='/requests' id='requests'>
       <input class='navbar' type='submit' value='Manage Requests'>
     </form>
@@ -19,7 +21,9 @@
     </form>
   <% end %>
 </nav>
-
+<a href='/'>
+<img id="logo" src="/bear.png" href='/'>
+</a>
 <% if @current_user %>
 
   <h3>Logged in as <%=@current_user.username%></h3>
@@ -43,8 +47,4 @@
 <% end %>
 
 </body>
-
-<form action="/" method="get">
-  <input type="submit" value="Home" >
-</form>
 
