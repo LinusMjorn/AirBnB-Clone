@@ -4,7 +4,8 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-  color: white
+  color: white;
+  opacity: 0.6
 }
 
 nav {
@@ -27,6 +28,8 @@ h3 {
 
 ul {
   list-style-type: none;
+  font-family: Papyrus
+
 }
 
 .navbar {
@@ -34,6 +37,7 @@ ul {
   background-color: transparent;
   color: white;
   border: none;
+  font-family: Papyrus
 }
 
 .navbar:hover {
@@ -56,6 +60,9 @@ ul {
   background-color: transparent;
   color: white;
   border: none;
+  font-size: 150%;
+  margin-bottom: 15px;
+  font-family: Papyrus
 }
 
 .new_space:hover {
