@@ -38,7 +38,7 @@
 
 <ul>
   <% @requests_for.each do |request| %>
-  <li> <%= Request.get_username(request.guest_id) %> has requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night.
+  <li> Somebody requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night.
   </li>
   <%end%>
 </ul>
