@@ -22,5 +22,13 @@
 <h3><%= @current_user.username %>: Your requests are listed below</h3>
 
 
+<ul>
+    <% @requests.each do |request| %>
+    <li> You have requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night.
+    </li>
+    <%end%>
+</ul>
+
+
 
 </body>

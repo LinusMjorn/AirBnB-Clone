@@ -24,4 +24,12 @@ class Request
       Request.new(request['id'], request['date'], request['guest_id'], request['space_id'])
     end
   end
+
+  def self.get_space(space_id)
+    result = DatabaseConnection.query("SELECT userid, description, price FROM spaces WHERE id = '#{space_id}'")
+    Space.new(space_id, result[0]['userid'], result[0]['description'], result[0]['price'].to_i)
+
+  end
+
+
 end
