@@ -13,7 +13,7 @@ class Space
     @userid = userid
     @description = description
     @price = price
-    @available_dates = []
+    @available_dates = get_available_dates(@id)
   end
 
 
@@ -21,7 +21,7 @@ class Space
   def self.create(userid, description, price)
     result = DatabaseConnection.query("INSERT INTO spaces (userid, description, price) VALUES ('#{userid}', '#{description}', '#{price}') RETURNING id")
     Space.new(result[0]['id'], userid, description, price)
-
+  end
 
   def first_date
     @available_dates.min
@@ -53,9 +53,14 @@ class Space
     date_array = dates.map do |date|
        date['available_date']
     end
+    Space.new(space_id, result[0]['userid'], result[0]['description'], result[0]['price'].to_i)
+  end
 
-    Space.new(space_id, result[0]['userid'], result[0]['description'], result[0]['price'].to_i, date_array)
-
+  def get_available_dates(space_id)
+    dates = DatabaseConnection.query("SELECT available_date FROM available_dates WHERE space_id =#{space_id}")
+    date_array = dates.map do |date|
+       date['available_date']
+    end
   end
 
   def add_date(space_id, date)
