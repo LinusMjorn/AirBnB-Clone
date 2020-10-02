@@ -5,12 +5,12 @@ class Request
 
   attr_reader :id, :date, :guest_id, :space_id, :approved
 
-  def initialize(id, date, guest_id, space_id)
+  def initialize(id, date, guest_id, space_id, approved = 0)
     @id = id
     @date = date
     @guest_id = guest_id
     @space_id = space_id
-    @approved = 0
+    @approved = approved
   end
 
   def self.create(date, guest_id, space_id)
@@ -21,14 +21,14 @@ class Request
   def self.my_requests(user_id)
     result = DatabaseConnection.query("SELECT * FROM bookings WHERE guest_id = '#{user_id}'")
     result.map do |request|
-      Request.new(request['id'], request['date'], request['guest_id'], request['space_id'])
+      Request.new(request['id'], request['date'], request['guest_id'], request['space_id'], request['approved'])
     end
   end
 
   def self.my_requests_for(user_id)
     result = DatabaseConnection.query("SELECT * FROM bookings JOIN spaces ON space_id = spaces.id WHERE spaces.userid = '#{user_id}'")
     result.map do |request|
-      Request.new(request['id'], request['date'], request['guest_id'], request['space_id'])
+      Request.new(request['id'], request['date'], request['guest_id'], request['space_id'], request['approved'])
     end
   end
 
@@ -40,6 +40,11 @@ class Request
   def self.get_username(user_id)
     result = DatabaseConnection.query("SELECT username FROM users WHERE id = '#{user_id}'")
     result[0]['username']
+  end
+
+  def self.approve(request_id)
+    result = DatabaseConnection.query("UPDATE bookings SET approved = '1' WHERE id = #{request_id};")
+    @approved = 1
   end
 
 
