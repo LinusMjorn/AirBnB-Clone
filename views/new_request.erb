@@ -1,4 +1,4 @@
-<head>
+ <head>
   <link rel='stylesheet' href='mystyle.css' >
   <link rel='icon' type=image/png' href='bear.png'>
   <title>New Request</title>
@@ -22,3 +22,15 @@
 <h3>New request</h3>
 
 </body>
+
+
+<%=@space.available_dates.min%>
+<%=@space.available_dates.max%>
+
+
+<form action="/sent/request/<%= @space.id %> " method="post">
+<input type="date" name="booking_date" min=<%=@space.available_dates.min%> max=<%=@space.available_dates.max%> >
+<input type="submit" value="book now">
+</form>
+<%= flash[:shits_been_booked] %> 
+

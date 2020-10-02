@@ -1,3 +1,4 @@
+
 # feature 'add available dates to an existing space' do
 #   scenario 'add dates to a space' do
 #     signup_bear1
@@ -10,3 +11,9 @@
 #     click_button 'Log Out'
 #   end
 # end
+
+feature 'add available dates to an existing space' do
+  scenario 'add dates to a space' do
+  end
+end
+
