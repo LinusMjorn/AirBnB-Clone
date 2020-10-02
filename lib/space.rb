@@ -16,13 +16,14 @@ class Space
     @available_dates = get_available_dates(@id)
   end
 
+ 
 
 
   def self.create(userid, description, price)
     result = DatabaseConnection.query("INSERT INTO spaces (userid, description, price) VALUES ('#{userid}', '#{description}', '#{price}') RETURNING id")
     Space.new(result[0]['id'], userid, description, price)
   end
-
+=begin
   def first_date
     @available_dates.min
   end
@@ -30,7 +31,7 @@ class Space
   def last_date
     @available_dates.max
   end
-
+=end
   def self.space_available?(space_id, date)
    dates = DatabaseConnection.query("SELECT available_date FROM available_dates WHERE space_id= #{space_id}")
    date_array = dates.map { |date| date['available_date'] }
@@ -63,9 +64,12 @@ class Space
     end
   end
 
-  def add_date(space_id, date)
-    DatabaseConnection.query("INSERT INTO available_dates (space_id, available_date) VALUES ('#{space_id}', '#{date}');")
-    @available_dates << date
+  def self.add_dates(space_id, start_date, end_date)
+    dates = middle_dates(start_date, end_date)
+    dates.each do |date|
+      DatabaseConnection.query("INSERT INTO available_dates (space_id, available_date) VALUES ('#{space_id}', '#{date}');")
+      #@available_dates << date
+    end
   end
 
   def self.middle_dates(min_date, max_date)
