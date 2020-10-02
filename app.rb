@@ -1,6 +1,5 @@
 require 'sinatra/base'
-require './lib/space.rb'
-require './lib/database_connection.rb'
+require './lib/space'
 require './lib/user'
 require './lib/request'
 require 'sinatra/flash'
@@ -37,15 +36,16 @@ class Airbnb < Sinatra::Base
 
 
   post '/dashboard/new' do
-    Space.create(@current_user.id, params[:description], params[:price], params[:available_dates])
-    redirect '/dashboard'
 
+    Space.create(@current_user.id, params[:description], params[:price])
+
+    redirect '/dashboard'
   end
 
   post '/signup' do
 
     if (!User.duplicated_username?(params[:username]) && User.unique_email?(params[:email]))
-      @current_user = User.store(params[:password], params[:username], params[:username])
+      @current_user = User.store(params[:password], params[:username], params[:email])
       redirect '/'
     else
       flash[:already_signed_up] = "Username or email is taken"
@@ -70,7 +70,6 @@ class Airbnb < Sinatra::Base
   end
 
   get '/requests' do
-    # @current_user = User.instance
     @requests = Request.my_requests(@current_user.id)
     erb :requests
   end
