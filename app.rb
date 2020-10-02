@@ -79,6 +79,11 @@ class Airbnb < Sinatra::Base
     erb :new_request
   end
 
+  get '/request/:id/approve' do
+    Request.approve(params[:id])
+    redirect '/requests'
+  end
+
   post '/sent/request/:id' do
 
     @space = Space.find(params[:id])

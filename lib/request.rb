@@ -42,5 +42,10 @@ class Request
     result[0]['username']
   end
 
+  def self.approve(request_id)
+    result = DatabaseConnection.query("UPDATE bookings SET approved = '1' WHERE id = #{request_id};")
+    @approved = 1
+  end
+
 
 end
