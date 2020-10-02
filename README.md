@@ -43,6 +43,9 @@ Set up Database Tables
 
 visit localhost:9292 on your browser  
 
+## How to run testing
+
+    rspec
 
 ## Users Stories Implemented
 
