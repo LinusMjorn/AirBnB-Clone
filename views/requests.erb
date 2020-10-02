@@ -38,10 +38,10 @@
 
 <ul>
   <% @requests_for.each do |request| %>
-  <li> <%= Request.get_username(request.guest_id) %> has requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night.
+  <li> <%= Request.get_username(request.guest_id) %> has requested: <%= Request.get_space(request.space_id).description  %> on <%= request.date %> for £<%= Request.get_space(request.space_id).price%> per night. The status of this request is <%= request.approved %>
        <form action="/request/<%= request.id %>/approve" method='get'>
        <input type="submit" value="Approve">
-      </form>
+       </form>
   </li>
   <%end%>
 </ul>
