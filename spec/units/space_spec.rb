@@ -19,8 +19,8 @@ describe Space do
       johnny = User.store("password2","johnny","linus@linus.com")
       Space.create(linus.id, 'seafront room', 400)
       Space.create(johnny.id, 'bachelor pad', 50)
-      expect(Space.all[0].description).to eq 'bachelor pad'
-      expect(Space.all[1].description).to eq 'seafront room'
+      expect(Space.all[0].description).to eq 'seafront room'
+      expect(Space.all[1].description).to eq 'bachelor pad'
     end
   end
 
