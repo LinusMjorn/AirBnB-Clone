@@ -38,7 +38,7 @@ class Airbnb < Sinatra::Base
   post '/dashboard/new' do
 
     Space.create(@current_user.id, params[:description], params[:price])
-
+    Space.add_dates(@current_user.id, params[:start_date], params[:end_date]) unless params[:start_date].length.zero?  #if time, refactor this method to be completed within space.create
     redirect '/dashboard'
   end
 
