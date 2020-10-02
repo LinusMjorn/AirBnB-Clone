@@ -1,12 +1,15 @@
 <head>
   <link rel='stylesheet' href='/mystyle.css' >
-  <link rel='icon' type='image/png' href='bear.png'>
+  <link rel='icon' type='image/png' href='/bear.png'>
   <title>Index</title>
 </head>
 
 <body>
 <nav>
   <% if @current_user %>
+  <form method='get' action='/' id='home'>
+    <input class='navbar' type='submit' value='Home'>
+  </form>
     <form method='get' action='/dashboard' id='dashboard'>
       <input class='navbar' type='submit' value='Dashboard'>
     </form>  
@@ -18,10 +21,11 @@
     </form>
   <% end %>
 </nav>
-<img id="logo" src="bear.png">
+<a href='/'>
+<img id="logo" src="/bear.png" href='/'>
+</a>
 <h1> Welcome to BearBnB! </h1>
-
-<p> For all your ursidae housing needs</p>
+<h3>For all your ursidae housing needs</h3>
 
 
 <% if !@current_user%>
