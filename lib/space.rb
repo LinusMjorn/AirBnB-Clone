@@ -21,21 +21,21 @@ class Space
     #Space.new(result[0]['id'], userid, description, price, available_dates)
   end
 
-  def min_date
+  def first_date
     @available_dates.min
   end
 
-  def max_date
+  def lass_date
     @available_dates.max
   end
-=begin  
+
   def self.space_available?(space_id, date)
    dates = DatabaseConnection.query("SELECT available_date FROM available_dates WHERE space_id= #{space_id}")
    date_array = dates.map { |date| date['available_date'] }
    p date_array
-   p !date_array.include?(date )
+    !date_array.include?(date)
   end
-=end
+
   def self.all
     result = DatabaseConnection.query("SELECT * FROM spaces;") # JOIN users ON spaces.userid = users.id ORDER BY spaces.id DESC;") 
     result.map { |space|
