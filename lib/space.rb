@@ -8,9 +8,10 @@ class Space
   attr_reader :username, :userid, :description, :price, :id
   attr_accessor :available_dates
 
-  def initialize(id, userid, description, price)
+  def initialize(id, userid, name, description, price)
     @id = id
     @userid = userid
+    @name = name
     @description = description
     @price = price
     @available_dates = get_available_dates(@id)
@@ -19,9 +20,9 @@ class Space
  
 
 
-  def self.create(userid, description, price)
-    result = DatabaseConnection.query("INSERT INTO spaces (userid, description, price) VALUES ('#{userid}', '#{description}', '#{price}') RETURNING id")
-    Space.new(result[0]['id'], userid, description, price)
+  def self.create(userid, name, description, price)
+    result = DatabaseConnection.query("INSERT INTO spaces (userid, description, price, name) VALUES ('#{userid}', '#{description}', '#{price}', '#{name}') RETURNING id")
+    Space.new(result[0]['id'], userid, name, description, price)
   end
 
   def self.space_available?(space_id, date)
@@ -35,18 +36,18 @@ class Space
   def self.all
     result = DatabaseConnection.query("SELECT * FROM spaces;") # JOIN users ON spaces.userid = users.id ORDER BY spaces.id DESC;") 
     result.map { |space|
-    Space.new(space['id'], space['userid'], space['description'], space['price']) } #use gsub to remove {} and then turn back into array with split(","). Write a unit test for .all and get that to work
+    Space.new(space['id'], space['userid'], space['name'], space['description'], space['price']) } #use gsub to remove {} and then turn back into array with split(","). Write a unit test for .all and get that to work
 
   end
 
   def self.find(space_id)
-    result = DatabaseConnection.query("SELECT userid, description, price FROM spaces JOIN users ON userid = users.id WHERE spaces.id = #{space_id}")
+    result = DatabaseConnection.query("SELECT userid, name, description, price FROM spaces JOIN users ON userid = users.id WHERE spaces.id = #{space_id}")
 
     dates = DatabaseConnection.query("SELECT available_date FROM available_dates WHERE space_id =#{space_id}")
     date_array = dates.map do |date|
        date['available_date']
     end
-    Space.new(space_id, result[0]['userid'], result[0]['description'], result[0]['price'].to_i)
+    Space.new(space_id, result[0]['userid'], result[0]['name'], result[0]['description'], result[0]['price'].to_i)
   end
 
   def get_available_dates(space_id)
